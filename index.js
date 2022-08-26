@@ -3,7 +3,7 @@ const CircuitBreaker = require('opossum');
 // サーキットブレーカーの対象となる非同期関数を実装
 const asyncFunction = (arg) => {
   return new Promise((resolve, reject) => {
-    arg === 'OK' ? resolve(`${arg}!!!`) : reject();
+    arg === 'OK' ? resolve(`Good: ${arg}`) : reject();
   });
 };
 
@@ -12,7 +12,7 @@ const circuit = new CircuitBreaker(asyncFunction);
 
 // fallbackで非同期関数でエラーが発生した場合の処理を実装
 circuit.fallback((arg) => {
-  return `${arg}!!!`
+  return `Bad:${arg}`
 });
 
 (async () => {
